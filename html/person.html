@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../css/Container.css" class="css">
+    <link rel="stylesheet" href="../css/person.css" class="css">
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css" class="css">
+    <script src="../element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="20vh" style="padding: 0;">
+                <div class="head" style="overflow: hidden;padding-right: 10px;">
+                    <p style="float: left;"><span><a href="../index.html">无论何时请不要抛弃它，因为他的世界只有你！！！</a></span></p>
+                    <p style="float: right;"><span><a href="../index.html">返回首页</a></span></p>
+                </div>
+                <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
+                    <p><img src="../image/logo.png" style="cursor:pointer;" @click="toIndex"><span>个人中心</p>
+                </el-card>
+            </el-header>
+            <el-main>
+                <div class="personInfo">
+                    <el-row :gutter="20">
+                        <el-col :span="8">
+                            <div class="left">
+                                <div class="grid-content bg-purple">
+                                    <el-card class="box-card">
+                                        <p class="spendInfo"><i class="el-icon-s-custom">个人中心</i></p>
+                                        <p class="already"><span style="cursor: pointer;">你好！{{currentUser}}</span></p>
+                                        <p><img src="../image/logo1.jpg" alt="加入公益团队，让生命不在流浪"></img></p>
+                                    </el-card>
+                                </div>
+                            </div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="right">
+                                <el-card class="box-card">
+                                    <el-tabs v-model="activeName" type="card">
+                                        <el-tab-pane label="个人信息" name="first">
+                                            <el-form label-position="right" label-width="80px" :model="userform">
+                                                <el-form-item label="用户名:">
+                                                    <el-input v-model="userform.username" readonly></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="密码:">
+                                                    <el-input v-model="userform.password" readonly
+                                                        show-password></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="手机:">
+                                                    <el-input v-model="userform.phone" readonly></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="年龄:">
+                                                    <el-input v-model="userform.age" readonly></el-input>
+                                                </el-form-item>
+                                            </el-form>
+                                        </el-tab-pane>
+                                        <el-tab-pane label="修改信息" name="second">
+                                            <el-form label-position="right" label-width="80px" :model="userform">
+                                                <el-form-item label="用户名:">
+                                                    <el-input v-model="userform.username" placeholder="请输入新的用户名"
+                                                        clearable></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="密码:">
+                                                    <el-input v-model="userform.password" clearable
+                                                        placeholder="请输入新的密码" show-password></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="手机:">
+                                                    <el-input v-model="userform.phone"
+                                                        placeholder="请输入新的手机号"></el-input>
+                                                </el-form-item>
+                                                <el-form-item align="left">
+                                                    <el-button type="primary"
+                                                        @click="submitForm(userform)">立即修改</el-button>
+                                                </el-form-item>
+                                            </el-form>
+                                        </el-tab-pane>
+                                    </el-tabs>
+                                </el-card>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-main>
+            <el-footer height="233px">
+                <div class="footer-top">
+                    <div class="content">
+                        <h3>关于我们</h3>
+                        <p>阿波宠物领养</p>
+                        <p>www.AboPet.com</p>
+                        <p>联系我们</p>
+                    </div>
+                    <div class="content">
+                        <h3>网站协议</h3>
+                        <p>用户协议</p>
+                        <p>免责声明</p>
+                        <p>订单协议</p>
+                        <p>隐私声明</p>
+                    </div>
+                    <div class="content">
+                        <h3>信息安全</h3>
+                        <p>欺诈举报</p>
+                        <p>留言反馈</p>
+                        <p>版权申明</p>
+                    </div>
+                    <div class="content">
+                        <h3>站务合作</h3>
+                        <p>站务合作</p>
+                        <p>公益活动</p>
+                        <p>联系方式</p>
+                    </div>
+                    <div class="content">
+                        <h3>联系我们</h3>
+                        <p>服务热线：400-123-1234</p>
+                        <p>邮箱：AboPet@gmail.com</p>
+                    </div>
+                </div>
+            </el-footer>
+        </el-container>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                activeName: 'first',
+                currentUser: '',
+                userform: {
+                    username: '',
+                    password: '',
+                    age: "",
+                    phone: '',
+                    pets: []
+                },
+            };
+        },
+        methods: {
+            // 提交表单登录
+            submitForm(userform) {
+                // 防止不填信息改密码
+                if (userform.username != '' || userform.password != '') {
+                    this.$confirm('确定修改用户信息?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        console.log(userform);
+                        localStorage.setItem(userform.username, JSON.stringify(userform))
+                        const usernameList = JSON.parse(localStorage.getItem('usernameList'))
+                        var index = usernameList.indexOf(this.currentUser)
+                        usernameList.splice(index, 1, userform.username)
+                        localStorage.setItem('usernameList', JSON.stringify(usernameList))
+                        if (userform.username != this.currentUser) {
+                            localStorage.removeItem(this.currentUser)
+                        }
+                        sessionStorage.setItem("currentUser", JSON.stringify(userform.username))
+                        this.$message.success('修改成功')
+                        location.reload()
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消修改'
+                        });
+                    });
+                } else {
+                    this.$message({
+                        message: '您还没有修改过信息哦!',
+                        type: 'warning'
+                    });
+                }
+            },
+            // 跳转注册
+            toIndex() {
+                location.assign("../index.html")
+            },
+        },
+        mounted() {
+            const arr = JSON.parse(localStorage.getItem(JSON.parse(sessionStorage.getItem('currentUser'))))
+            this.userform.username = arr.username
+            this.userform.password = arr.password
+            this.userform.phone = arr.phone
+            this.userform.age = arr.age
+            this.userform.pets = arr.pets
+            this.currentUser = arr.username
+        },
+    })
+</script>
+
+</html>

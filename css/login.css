@@ -1,0 +1,103 @@
+.el-header span {
+    font-size: 12px;
+}
+
+a {
+    color: red;
+}
+
+.el-header .head {
+    overflow: hidden;
+    padding: 0px 20px;
+    letter-spacing: 1px
+}
+
+.el-header img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-header .box-card {
+    background-color: rgb(245, 245, 245);
+    border: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.el-header .box-card span {
+    float: right;
+    line-height: 100px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+/* main */
+.bg {
+    background: url("../image/bg.png") no-repeat center;
+    height: 80vh;
+    background-size: cover;
+}
+
+.for {
+    position: absolute;
+    padding-top: 80px;
+    border: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 2px 0 lightgray;
+    width: 40%;
+    left: 30%;
+    top: 30%;
+}
+
+.big {
+    position: absolute;
+    top: -20%;
+    text-align: center;
+    left: 35%;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0px 0px 5px gray;
+}
+
+.el-main img {
+    background-color: rgb(238, 238, 238);
+    border-radius: 50%;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-row {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.el-form {
+    width: 95%;
+}
+
+.el-form .el-form-item:last-child {
+    text-align: right;
+}
+
+.el-row {
+    padding-bottom: 50px;
+}
+
+/**/
+.el-main {
+    background-color: white;
+    padding: 0 !important;
+}
+
+.form {
+    position: absolute;
+    border: 1px solid red;
+    width: 40%;
+    left: 30%;
+    top: 30%;
+}

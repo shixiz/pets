@@ -1,0 +1,117 @@
+/* header */
+.el-header span {
+    font-size: 12px;
+}
+
+a {
+    color: red;
+}
+
+.el-header .head {
+    overflow: hidden;
+    padding: 0px 20px;
+    letter-spacing: 1px
+}
+
+.el-header img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-header .box-card {
+    background-color: rgb(245, 245, 245);
+    border: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.el-header .box-card span {
+    color: lightgray;
+    font-size: 20px;
+}
+
+/* layout */
+.el-row {
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.el-col {
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+/* elmain */
+.personInfo {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.personInfo .left {
+    height: 350px;
+}
+
+.personInfo .right {
+    height: inherit;
+}
+
+.el-main .box-card {
+    height: 350px;
+}
+
+.spendInfo {
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 2px solid lightgray;
+    font-size: 30px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.spendInfo i {
+    padding: 15px 0px 0px 0px;
+}
+
+.already {
+    font-size: 24px;
+    margin: 20px auto;
+    color: red;
+}
+
+.el-main p img {
+    width: 90%;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 3px 0px lightgray;
+    margin-top: 25px 0px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.el-tabs .el-tab-pane:nth-child(1) .el-input__inner {
+    border: none;
+}

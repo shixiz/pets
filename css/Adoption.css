@@ -1,0 +1,104 @@
+/* header */
+.el-header span {
+    font-size: 12px;
+}
+
+a {
+    color: red;
+}
+
+.el-header .head {
+    overflow: hidden;
+    padding: 0px 20px;
+    letter-spacing: 1px
+}
+
+.el-header img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-header .box-card {
+    background-color: rgb(245, 245, 245);
+    border: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.el-header .box-card span {
+    color: lightgray;
+    font-size: 20px;
+}
+
+/* layout */
+.el-row {
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.el-col {
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+/* elmain */
+.personInfo {
+    width: 80%;
+    margin: 0 auto;
+    height: inherit;
+    height: 450px;
+}
+
+.personInfo img {
+    height: 450px;
+    min-height: 350px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.el-main .box-card p {
+    font-size: 25px;
+    text-align: left;
+    color: rgb(0, 191, 255);
+    font-weight: bold;
+    border-bottom: 2px solid rgb(0, 191, 255);
+    padding-bottom: 5px;
+}
+
+.el-main .el-input__inner {
+    border: none;
+}
+
+.el-main .box-card {
+    height: 70vh;
+
+}
+
+.el-main .el-form {
+    margin: 20px 0px;
+}

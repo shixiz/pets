@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../css/Container.css" class="css">
+    <link rel="stylesheet" href="../css/login.css" class="css">
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css" class="css">
+    <script src="../element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="20vh" style="padding: 0;">
+                <div class="head" style="overflow: hidden;padding-right: 10px;">
+                    <p style="float: left;"><span><a href="../index.html">无论何时请不要抛弃它，因为他的世界只有你！！！</a></span></p>
+                </div>
+                <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
+                    <p><img src="../image/logo.png" style="cursor:pointer;" @click="toIndex"><span>还没有账号？
+                            <span style="color: red;cursor: pointer;" @click="Register">去注册</span>
+                        </span>
+                    </p>
+                </el-card>
+            </el-header>
+            <el-main>
+                <div class="bg"></div>
+                <div class="for">
+                    <el-row style="font-size: 25px;">
+                        阿波宠物领养
+                    </el-row>
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="30px"
+                        class="demo-ruleForm">
+                        <el-form-item prop="username">
+                            <el-input type="text" prefix-icon="el-icon-user-solid" v-model="ruleForm.username"
+                                autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item prop="password">
+                            <el-input type="password" prefix-icon="el-icon-lock" v-model="ruleForm.password"
+                                autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                            <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            //验证用户名是否存在,用户不存在输入框将会有提示
+            var validateUser = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入用户名'));
+                } else {
+                    let i = 0
+                    for (; i < this.usernameList.length; i++) {
+                        if (this.ruleForm.username === this.usernameList[i]) {
+                            var obj = JSON.parse(localStorage.getItem(this.usernameList[i]))
+                            this.password = obj.password
+                            break
+                        }
+                    }
+                    if (i === this.usernameList.length) {
+                        callback(new Error('用户名不存在'))
+                    }
+                }
+                callback()
+            };
+            //验证存在用户密码是否争取
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else if (this.password !== this.ruleForm.password) {
+                    callback(new Error('密码错误'));
+                } else {
+                    callback();
+                }
+            };
+            return {
+                password: '',
+                ruleForm: {
+                    username: '',
+                    password: '',
+                },
+                rules: {
+                    username: [
+                        { validator: validateUser, trigger: 'blur' }
+                    ],
+                    password: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ]
+                },
+                usernameList: [],
+            };
+        },
+        methods: {
+            // 提交表单登录
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        sessionStorage.setItem('currentUser', JSON.stringify(this.ruleForm.username))
+                        this.$message({
+                            message: "登录成功",
+                            type: 'success'
+                        })
+                        setTimeout(() => {
+                            window.location.assign("../index.html")
+                        }, 1000)
+                    } else {
+                        this.$message(
+                            {
+                                message: "用户名或密码错误！！",
+                                type: 'warning'
+                            }
+                        )
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            Register() {
+                location.assign('./Register.html')
+            },
+            toIndex() {
+                location.assign('../index.html')
+            }
+        },
+        mounted() {
+            if (localStorage.getItem('usernameList')) {
+                this.usernameList = JSON.parse(localStorage.getItem('usernameList'))
+            }
+        }
+    })
+</script>
+
+</html>

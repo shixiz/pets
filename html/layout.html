@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../css/Container.css" class="css">
+    <link rel="stylesheet" href="../css/layout.css" class="css">
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css" class="css">
+    <script src="../element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="20vh" style="padding: 0;">
+                <div class="head" style="overflow: hidden;padding-right: 10px;">
+                    <p style="float: left;"><span><a href="../index.html">无论何时请不要抛弃它，因为他的世界只有你！！！</a></span></p>
+                    <p style="float: right;"><span><a href="../index.html">返回首页</a></span></p>
+                </div>
+                <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
+                    <p><img src="../image/logo.png" style="cursor:pointer;" @click="toIndex"><span>用户统一发布</p>
+                </el-card>
+            </el-header>
+            <el-main>
+                <div class="steps">
+                    <el-steps :active="active" align-center>
+                        <el-step title="第一步" description="宠物信息">
+                        </el-step>
+                        <el-step title="第二步" description="确认宠物信息"></el-step>
+                    </el-steps>
+                    <el-card>
+                        <el-form :model="petsform" status-icon :rules="rules" ref="petsform" label-width="100px"
+                            v-show="active==1" class="demo-ruleForm">
+                            <el-form-item label="姓名" prop="name">
+                                <el-input type="text" v-model="petsform.name" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="年龄" prop="age">
+                                <el-input v-model.number="petsform.age"></el-input>
+                            </el-form-item>
+                            <el-form-item label="健康状态" prop="status">
+                                <el-input type="text" v-model="petsform.status" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="住址" prop="address">
+                                <el-input v-model="petsform.address"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="next('petsform')">下一步</el-button>
+                                <el-button @click="resetForm('petsform')">重置</el-button>
+                            </el-form-item>
+                        </el-form>
+                        <el-form v-show="active==2" :model="petsform" status-icon ref="petsform" label-width="100px"
+                            class="demo-ruleForm">
+                            <el-form-item label="姓名" prop="name">
+                                <el-input type="text" v-model="petsform.name" autocomplete="off" disabled></el-input>
+                            </el-form-item>
+                            <el-form-item label="年龄" prop="age">
+                                <el-input v-model.number="petsform.age" disabled></el-input>
+                            </el-form-item>
+                            <el-form-item label="健康状态" prop="status">
+                                <el-input type="text" v-model="petsform.status" autocomplete="off" disabled></el-input>
+                            </el-form-item>
+                            <el-form-item label="住址" prop="address">
+                                <el-input v-model="petsform.address" disabled></el-input>
+                            </el-form-item>
+                            <el-form-item label="图片" prop="file">
+                                <input type="file" @change="getFile">
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="pre">上一步</el-button>
+                                <el-button type="primary" @click="submitForm('petsform')">提交</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </el-card>
+                </div>
+            </el-main>
+            <el-footer height="233px">
+                <div class="footer-top">
+                    <div class="content">
+                        <h3>关于我们</h3>
+                        <p>阿波宠物领养</p>
+                        <p>www.AboPet.com</p>
+                        <p>联系我们</p>
+                    </div>
+                    <div class="content">
+                        <h3>网站协议</h3>
+                        <p>用户协议</p>
+                        <p>免责声明</p>
+                        <p>订单协议</p>
+                        <p>隐私声明</p>
+                    </div>
+                    <div class="content">
+                        <h3>信息安全</h3>
+                        <p>欺诈举报</p>
+                        <p>留言反馈</p>
+                        <p>版权申明</p>
+                    </div>
+                    <div class="content">
+                        <h3>站务合作</h3>
+                        <p>站务合作</p>
+                        <p>公益活动</p>
+                        <p>联系方式</p>
+                    </div>
+                    <div class="content">
+                        <h3>联系我们</h3>
+                        <p>服务热线：400-123-1234</p>
+                        <p>邮箱：AboPet@gmail.com</p>
+                    </div>
+                </div>
+            </el-footer>
+        </el-container>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            var checkAge = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('年龄不能为空'));
+                }
+                setTimeout(() => {
+                    if (!Number.isInteger(value)) {
+                        callback(new Error('请输入数字值'));
+                    } else {
+                        if (value < 0) {
+                            callback(new Error('必须大于0岁'));
+                        } else {
+                            callback();
+                        }
+                    }
+                }, 1000);
+            };
+            var checkName = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('姓名不能为空'));
+                }
+                callback();
+            };
+            var checkStatus = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('健康状态不能为空'));
+                }
+                callback();
+            };
+            var checkAddress = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('住址不能为空'));
+                }
+                callback();
+            }
+            return {
+                active: 1,
+                petsform: {
+                    name: '',
+                    age: '',
+                    comeform: '',
+                    status: '',
+                    file: ''
+                },
+                rules: {
+                    name: [
+                        { validator: checkName, trigger: 'blur' }
+                    ],
+                    status: [
+                        { validator: checkStatus, trigger: 'blur' }
+                    ],
+                    age: [
+                        { validator: checkAge, trigger: 'blur' }
+                    ],
+                    address: [
+                        { validator: checkAddress, trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+        methods: {
+            getFile(e) {
+                console.log(e.target.files);
+            },
+            toIndex() {
+                location.assign('../index.html')
+            },
+            next(petsform) {
+                this.$refs[petsform].validate((valid) => {
+                    if (valid) {
+                        ++this.active
+                    } else {
+                        this.$message.error('请仔细核验信息')
+                        return false;
+                    }
+                })
+            },
+            pre() { --this.active },
+            submitForm(petsform) {
+                this.$refs[petsform].validate((valid) => {
+                    if (valid) {
+                        location.assign('./success.html')
+                    } else {
+                        this.$message.error('提交错误')
+                        return false;
+                    }
+                });
+            },
+            resetForm(petsform) {
+                this.$refs[petsform].resetFields();
+            }
+        },
+    })
+</script>
+
+</html>

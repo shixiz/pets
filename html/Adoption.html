@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../css/Container.css" class="css">
+    <link rel="stylesheet" href="../css/Adoption.css" class="css">
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css" class="css">
+    <script src="../element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="20vh" style="padding: 0;">
+                <div class="head" style="overflow: hidden;padding-right: 10px;">
+                    <p style="float: left;"><span><a href="../index.html">无论何时请不要抛弃它，因为他的世界只有你！！！</a></span></p>
+                    <p style="float: right;"><span><a href="../index.html">返回首页</a></span></p>
+                </div>
+                <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
+                    <p><img src="../image/logo.png" style="cursor:pointer;" @click="toIndex"><span>个人中心</p>
+                </el-card>
+            </el-header>
+            <el-main>
+                <div class="personInfo">
+                    <el-row :gutter="20">
+                        <el-col :span="8">
+                            <div class="img">
+                                <el-card class="box-card">
+                                    <img :src="pets.url">
+                                </el-card>
+                            </div>
+                        </el-col>
+                        <el-col :span="16">
+                            <el-card class="box-card">
+                                <p>{{pets.name}}的资料</p>
+                                <el-form label-position="right" label-width="80px">
+                                    <el-form-item label="姓名:">
+                                        <el-input v-model="pets.name" readonly></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="年龄:">
+                                        <el-input v-model="pets.age" readonly></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="地址:">
+                                        <el-input v-model="pets.comeform" readonly></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="健康状态:">
+                                        <el-input v-model="pets.status" readonly></el-input>
+                                    </el-form-item>
+                                    <el-form-item align="left">
+                                        <input type="checkbox" v-model="checkFlag">我同意《宠物领养合同协议》<br>
+                                        <el-button type="primary" @click="submitForm">我要领养</el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-main>
+            <el-footer height="233px">
+                <div class="footer-top">
+                    <div class="content">
+                        <h3>关于我们</h3>
+                        <p>阿波宠物领养</p>
+                        <p>www.AboPet.com</p>
+                        <p>联系我们</p>
+                    </div>
+                    <div class="content">
+                        <h3>网站协议</h3>
+                        <p>用户协议</p>
+                        <p>免责声明</p>
+                        <p>订单协议</p>
+                        <p>隐私声明</p>
+                    </div>
+                    <div class="content">
+                        <h3>信息安全</h3>
+                        <p>欺诈举报</p>
+                        <p>留言反馈</p>
+                        <p>版权申明</p>
+                    </div>
+                    <div class="content">
+                        <h3>站务合作</h3>
+                        <p>站务合作</p>
+                        <p>公益活动</p>
+                        <p>联系方式</p>
+                    </div>
+                    <div class="content">
+                        <h3>联系我们</h3>
+                        <p>服务热线：400-123-1234</p>
+                        <p>邮箱：AboPet@gmail.com</p>
+                    </div>
+                </div>
+            </el-footer>
+        </el-container>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                currentUser: '',
+                pets: {},
+                checkFlag: false,
+                petsStation: []
+            };
+        },
+        methods: {
+            submitForm() {
+                if (this.currentUser == null) {
+                    this.$message.error('您还未登录')
+                    setTimeout(() => {
+                        return location.assign('./Login.html')
+                    }, 1000)
+                } else {
+                    if (this.checkFlag == false) {
+                        this.$message.warning('请勾选《宠物领养合同协议》')
+                    } else {
+                        if (this.petsStation.length == 0) {
+                            this.$message.warning('我们会将您的联系方式提供给对方，请耐心等待')
+                            const user = JSON.parse(localStorage.getItem(this.currentUser))
+                            user.pets.push(this.pets)
+                            localStorage.setItem(this.currentUser, JSON.stringify(user))
+                            setTimeout(() => {
+                                return location.reload()
+                            }, 500)
+                        } else {
+                            const user = JSON.parse(localStorage.getItem(this.currentUser))
+                            let a = 0
+                            user.pets.forEach(item => {
+                                if (item.id == this.pets.id) {
+                                    a++
+                                }
+                            });
+                            if (a) {
+                                this.$message.error('我们已将您的联系方式提供给对方，请耐心等待')
+                            } else {
+                                user.pets.push(this.pets)
+                                localStorage.setItem(this.currentUser, JSON.stringify(user))
+                            }
+                        }
+
+                    }
+                }
+            },
+            // 跳转首页
+            toIndex() {
+                location.assign("../index.html")
+            },
+        },
+        created() {
+            this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'))
+            this.pets = (JSON.parse(sessionStorage.getItem('pets')))
+            if (this.currentUser !== null) {
+                this.petsStation = JSON.parse(localStorage.getItem(this.currentUser)).pets
+            }
+        }
+    })
+</script>
+
+</html>

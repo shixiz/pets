@@ -1,0 +1,92 @@
+/* header */
+.el-header span {
+    font-size: 12px;
+}
+
+a {
+    color: red;
+}
+
+.el-header .head {
+    overflow: hidden;
+    padding: 0px 20px;
+    letter-spacing: 1px
+}
+
+.el-header img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-header .box-card {
+    background-color: rgb(245, 245, 245);
+    border: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.el-header .box-card span {
+    color: lightgray;
+    font-size: 20px;
+}
+
+/* main */
+.info {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.info h1 {
+    text-align: left;
+    padding-bottom: 20px;
+}
+
+.info h6 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 10px;
+    border-bottom: 2px solid lightgray;
+}
+
+.info pre {
+    text-align: left;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    line-height: 25px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* footer */
+.el-footer {
+    background-color: rgb(231, 231, 231);
+    width: 100%;
+}
+
+.el-footer .footer-top {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.el-footer .content {
+    width: 20%;
+    padding-top: 50px;
+    float: left;
+}
+
+.el-footer .content h3 {
+    width: 100%;
+    height: 50px;
+    line-height: 20px;
+}
+
+
+.el-footer .content p {
+    height: 30px;
+    line-height: 30px;
+    color: #aaa;
+}

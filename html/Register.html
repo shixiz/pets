@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="../css/Container.css" class="css">
+    <link rel="stylesheet" href="../css/register.css" class="css">
+    <link rel="stylesheet" href="../element-ui/lib/theme-chalk/index.css" class="css">
+    <script src="../element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-container>
+            <el-header height="20vh" style="padding: 0;">
+                <div class="head" style="overflow: hidden;padding-right: 10px;">
+                    <p style="float: left;"><span><a href="../index.html">无论何时请不要抛弃它，因为他的世界只有你！！！</a></span></p>
+                    <p style="float: right;"><span><a href="./Login.html">返回登录</a></span></p>
+                </div>
+                <el-card class="box-card" shadow="never" :body-style="{ padding: '0px' }">
+                    <p><img src="../image/logo.png" style="cursor:pointer;" @click="toIndex"><span>用户统一注册</p>
+                </el-card>
+            </el-header>
+            <el-main>
+                <div class="form">
+                    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"
+                        class="demo-ruleForm">
+                        <el-form-item label="用户名" prop="username">
+                            <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" prop="password">
+                            <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="电话" prop="phone">
+                            <el-input v-model.number="ruleForm.phone"></el-input>
+                        </el-form-item>
+                        <el-form-item label="年龄" prop="age">
+                            <el-input v-model.number="ruleForm.age"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
+                            <el-button @click="resetForm('ruleForm')">重置</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-main>
+            <el-footer height="233px">
+                <div class="footer-top">
+                    <div class="content">
+                        <h3>关于我们</h3>
+                        <p>阿波宠物领养</p>
+                        <p>www.AboPet.com</p>
+                        <p>联系我们</p>
+                    </div>
+                    <div class="content">
+                        <h3>网站协议</h3>
+                        <p>用户协议</p>
+                        <p>免责声明</p>
+                        <p>订单协议</p>
+                        <p>隐私声明</p>
+                    </div>
+                    <div class="content">
+                        <h3>信息安全</h3>
+                        <p>欺诈举报</p>
+                        <p>留言反馈</p>
+                        <p>版权申明</p>
+                    </div>
+                    <div class="content">
+                        <h3>站务合作</h3>
+                        <p>站务合作</p>
+                        <p>公益活动</p>
+                        <p>联系方式</p>
+                    </div>
+                    <div class="content">
+                        <h3>联系我们</h3>
+                        <p>服务热线：400-123-1234</p>
+                        <p>邮箱：AboPet@gmail.com</p>
+                    </div>
+                </div>
+            </el-footer>
+        </el-container>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            //验证用户名是否存在,用户不存在输入框将会有提示
+            var validateUser = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入用户名'));
+                } else {
+                    for (let item of this.usernameList) {
+                        if (this.ruleForm.username === item) {
+                            callback(new Error('用户已存在'));
+                        }
+                    }
+                }
+                callback()
+            }
+            //验证存在用户密码是否争取
+            var phone = (rule, value, callback) => {
+                var pho = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
+                if (!value) {
+                    return callback(new Error('手机号不能为空'));
+                }
+                setTimeout(() => {
+                    if (!Number.isInteger(value)) {
+                        callback(new Error('请输入数字'));
+                    } else {
+                        if (!pho.test(value)) {
+                            callback(new Error('手机号码不正确'));
+                        } else {
+                            callback();
+                        }
+                    }
+                }, 1000);
+            };
+            var validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.ruleForm.password !== '') {
+                        callback();
+                    }
+                }
+            };
+            var checkAge = (rule, value, callback) => {
+                if (!value) {
+                    return callback(new Error('年龄不能为空'));
+                }
+                setTimeout(() => {
+                    if (!Number.isInteger(value)) {
+                        callback(new Error('请输入数字值'));
+                    } else {
+                        if (value < 18) {
+                            callback(new Error('必须年满18岁'));
+                        } else {
+                            callback();
+                        }
+                    }
+                }, 1000);
+            };
+            return {
+                ruleForm: {
+                    username: '',
+                    password: '',
+                    phone: '',
+                    age: "",
+                    pets: []
+                },
+                rules: {
+                    username: [
+                        { validator: validateUser, trigger: 'blur' }
+                    ],
+                    password: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ],
+                    phone: [
+                        { validator: phone, trigger: 'blur' }
+                    ],
+                    age: [
+                        { validator: checkAge, trigger: 'blur' }
+                    ]
+                },
+                usernameList: [],
+            };
+        },
+        methods: {
+            // 提交表单登录
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        localStorage.setItem(this.ruleForm.username, JSON.stringify(this.ruleForm))
+                        this.usernameList.push(this.ruleForm.username)
+                        localStorage.setItem("usernameList", JSON.stringify(this.usernameList))
+                        this.$message.success('注册成功')
+                        location.assign('./Login.html')
+                    } else {
+                        this.$message(
+                            {
+                                message: "信息输入错误",
+                                type: 'warning'
+                            }
+                        )
+                        return false;
+                    }
+                });
+            },
+            // 重置数据
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            // 跳转注册
+            toIndex() {
+                location.assign("../index.html")
+            }
+        },
+        mounted() {
+            if (localStorage.getItem("usernameList")) {
+                this.usernameList = JSON.parse(localStorage.getItem("usernameList"))
+            } else {
+                localStorage.setItem('usernameList', JSON.stringify(this.usernameList))
+            }
+        },
+    })
+</script>
+
+</html>

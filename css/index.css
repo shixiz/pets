@@ -1,0 +1,338 @@
+/* header */
+.el-header span {
+    font-size: 12px;
+}
+
+a {
+    color: gray;
+}
+
+.el-header .head {
+    overflow: hidden;
+    padding: 0px 20px;
+    letter-spacing: 1px;
+}
+
+.el-header img {
+    width: 150px;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.el-header .el-card__body {
+    padding-top: 10px;
+}
+
+.el-header .box-card div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logout span {
+    color: red;
+}
+
+.login {
+    float: right;
+    margin-right: 50px;
+}
+
+.login a {
+    color: red;
+}
+
+/* mian */
+.el-col {
+    border-radius: 4px;
+}
+
+.bg-purple-dark {
+    background: #99a9bf;
+}
+
+.bg-purple {
+    background: #d3dce6;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+
+.grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+}
+
+.Carousel,
+.Adoption {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.el-main .el-card__body {
+    padding: 0;
+}
+
+.box-card {
+    height: 300px;
+}
+
+.spendInfo {
+    color: rgb(0, 191, 255);
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgb(0, 191, 255);
+    font-size: 22px;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.spendInfo i {
+    padding: 15px 0px 0px 0px;
+    cursor: default;
+}
+
+.Carousel .el-button {
+    background-color: rgb(255, 87, 34);
+    width: 90%;
+    margin: 20px 0px;
+}
+
+.Carousel .already {
+    font-size: 24px;
+    margin: 20px auto;
+    color: orange;
+}
+
+.Carousel p img {
+    width: 90%;
+    border: 1px solid lightgray;
+    box-shadow: 0px 0px 3px 0px lightgray;
+    margin-top: 25px 0px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.Adoption .font {
+    text-align: left;
+    padding: 20px;
+    border-left: 4px solid rgb(0, 191, 255);
+    color: rgb(0, 191, 255);
+    font-size: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid lightgray;
+    border-right: 1px solid lightgray;
+    height: inherit;
+    cursor: default;
+}
+
+.Adoption p span {
+    font-size: 15px;
+    color: gray;
+    margin-left: 5px;
+}
+
+.el-main .petslist {
+    width: 170px;
+    height: 210px;
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.el-main .petslist p {
+    transform: translateY(0px);
+    opacity: 0;
+    width: 90%;
+    text-align: left;
+    transition: 1s;
+}
+
+.el-main .petslist:hover p {
+    transform: translateY(-50px);
+    opacity: 1;
+    transition: 1s;
+}
+
+.font .more {
+    margin-top: 5px;
+    float: right;
+    cursor: pointer;
+    line-height: inherit;
+    padding: 5px 5px;
+    font-weight: bold;
+}
+
+.font .more:hover {
+    background-color: rgb(0, 191, 255);
+    border-radius: 5px;
+    color: white;
+    vertical-align: bottom;
+}
+
+.knowledeList {
+    text-align: left;
+}
+
+.knowledeList li {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px dotted black;
+    padding-left: 20px;
+    white-space: nowrap;
+    width: 94%;
+    min-width: 50%;
+    /* margin: 0 auto; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.knowledeList li:hover {
+    color: rgb(0, 191, 255);
+    cursor: pointer;
+}
+
+.konw,
+.healthy {
+    margin-top: 20px;
+}
+
+.Encyclopedia .show {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    text-align: center;
+
+}
+
+.Encyclopedia .show ul {
+    min-width: 150px;
+    width: 80%;
+    margin-right: 10px;
+    height: 200px;
+    position: relative;
+    max-width: 250px;
+}
+
+.Encyclopedia .show ul li {
+    position: absolute;
+    bottom: 0px;
+    white-space: nowrap;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: rgb(35, 48, 43);
+    color: white;
+    font-size: 12px;
+}
+
+.happend {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.happend ul {
+    width: 49%;
+    font-size: 12px;
+    display: flex;
+    border-bottom: 1px dotted black;
+    height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.happend ul li {
+    line-height: 50px;
+}
+
+.happend ul li:nth-child(1) {
+    flex: 2;
+}
+
+.happend ul li:nth-child(1) span {
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(0, 191, 255);
+    padding: 2px 10px;
+}
+
+.happend ul li:nth-child(2) {
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.happend ul li:nth-child(3) {
+    color: lightgray;
+}
+
+.happend ul:hover li:nth-child(1) span {
+    transition: 0.5s;
+    background-color: orange;
+}
+
+.happend ul:hover li:nth-child(2) {
+    color: rgb(0, 191, 255);
+}
+
+.el-footer {
+    background-color: rgb(231, 231, 231);
+    width: 100%;
+}
+
+.el-footer .content {
+    width: 20%;
+    height: 200px;
+    padding: 50px 0;
+    float: left;
+}
+
+.el-footer .footer-top {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.el-footer .content h3 {
+    width: 100%;
+    height: 50px;
+    line-height: 20px;
+}
+
+.el-footer .content p {
+    height: 30px;
+    line-height: 30px;
+    color: #aaa;
+}
+
+.el-footer .footer-bottom {
+    height: 50px;
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.fontsty {
+    white-space: nowrap;
+    width: 95%;
+    min-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.right {
+    line-height: 100px;
+    text-align: right;
+    display: flex;
+    flex: 2;
+}
+
+.top {
+    display: flex;
+}
+
+.top p {
+    flex: 8;
+}
